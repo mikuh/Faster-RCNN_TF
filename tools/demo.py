@@ -64,8 +64,8 @@ def demo(sess, net, image_name):
     timer.tic()
     scores, boxes = im_detect(sess, net, im)
     timer.toc()
-    print ('Detection took {:.3f}s for '
-           '{:d} object proposals').format(timer.total_time, boxes.shape[0])
+    print(('Detection took {:.3f}s for '
+           '{:d} object proposals').format(timer.total_time, boxes.shape[0]))
 
     # Visualize detections for each class
     im = im[:, :, (2, 1, 0)]
@@ -95,7 +95,7 @@ def parse_args():
     parser.add_argument('--net', dest='demo_net', help='Network to use [vgg16]',
                         default='VGGnet_test')
     parser.add_argument('--model', dest='model', help='Model path',
-                        default=' ')
+                        default='../models/VGGnet_fast_rcnn_iter_70000.ckpt')
 
     args = parser.parse_args()
 
@@ -118,11 +118,11 @@ if __name__ == '__main__':
    
     #sess.run(tf.initialize_all_variables())
 
-    print '\n\nLoaded network {:s}'.format(args.model)
+    print('\n\nLoaded network {:s}'.format(args.model))
 
     # Warmup on a dummy image
     im = 128 * np.ones((300, 300, 3), dtype=np.uint8)
-    for i in xrange(2):
+    for i in range(2):
         _, _= im_detect(sess, net, im)
 
     im_names = ['000456.jpg', '000542.jpg', '001150.jpg',
@@ -130,8 +130,8 @@ if __name__ == '__main__':
 
 
     for im_name in im_names:
-        print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-        print 'Demo for data/demo/{}'.format(im_name)
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        print('Demo for data/demo/{}'.format(im_name))
         demo(sess, net, im_name)
 
     plt.show()
